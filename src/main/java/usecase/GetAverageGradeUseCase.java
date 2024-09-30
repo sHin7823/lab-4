@@ -30,10 +30,14 @@ public final class GetAverageGradeUseCase {
         //  when theres a dedicated method to locate grades for a specific course
         String[] members = team.getMembers();
         for (String member : members) {
-            Grade grade = gradeDataBase.getGrade(member, course);
-            if (grade != null) {
-                sum = sum + grade.getGrade();
-                count++;
+            Grade[] grades = gradeDataBase.getGrades(member);
+            for (Grade grade : grades) {
+                System.out.println(grade.getCourse());
+                if (grade.getCourse().equals(course)) {
+                    sum += grade.getGrade();
+                    count++;
+                    break;
+                }
             }
         }
 
